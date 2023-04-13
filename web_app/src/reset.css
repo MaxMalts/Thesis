@@ -1,0 +1,40 @@
+* {
+    padding: 0;
+    margin: 0;
+    outline: none;
+
+    font-weight: normal;
+
+    border: none;
+}
+
+hr {
+    border-bottom: 1px solid #000;
+}
+
+button {
+    display: block;
+    padding: 0;
+    border: none;
+    margin: 0;
+    background: none;
+    outline: none;
+    box-sizing: content-box;
+    color: inherit;
+    -webkit-tap-highlight-color: transparent;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+}
+
+textarea {
+    resize: none;
+    color: inherit;
+}
+
+input {
+    color: inherit;
+}
