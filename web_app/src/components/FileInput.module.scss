@@ -1,9 +1,9 @@
 $border-radius: 30px;
 $border-size: 5px;
+$hover-transition-duration: 60ms;
 
 .container {
-    width: 70%;
-    margin: 50px auto 0 auto;
+    width: 100%;
 }
 
 .dropArea {
@@ -15,8 +15,15 @@ $border-size: 5px;
     background: var(--primary-color-soft);
     border: solid var(--primary-color-strong) $border-size;
     border-radius: $border-radius;
+    box-shadow: 10px 8px 25px -15px var(--primary-color);
+
+    transition: filter $hover-transition-duration;
 
     position: relative;
+
+    &:hover {
+        filter: brightness(0.96);
+    }
 }
 
 .fileInput {
@@ -37,6 +44,12 @@ $border-size: 5px;
     width: 120px;
     margin: 20px auto 0 auto;
     color: var(--primary-color);
+
+    transition: transform $hover-transition-duration;
+}
+
+.dropArea:hover .addFileIcon {
+    transform: scale(1.03);
 }
 
 .draggingOverlay {
@@ -61,6 +74,7 @@ $border-size: 5px;
     height: 100%;
 
     background: var(--primary-color-soft);
+    filter: brightness(0.96);
     border-radius: $border-radius - $border-size;
 }
 

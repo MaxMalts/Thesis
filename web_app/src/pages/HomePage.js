@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import styles from './HomePage.module.scss.css';
+import styles from './HomePage.module.scss';
 import FileInput from '../components/FileInput';
 import recognizeText from '../api/recognizeText';
 
@@ -22,15 +22,24 @@ export default function() {
     }
 
     return (
-        <div className={styles.homePage}>
+        <div>
             <h1 className={styles.heading}>Handwritten Text Recognizer</h1>
 
-            <div>Choose an image containing your handwritten text:</div>
-            <FileInput onChange={setAddedFile}/>
-            <button type="button" onClick={onUploadClick} disabled={addedFile === null}>Recognize Text</button>
-            <div>{errorMessage}</div>
+            <p className={styles.description}>
+                Using this free service you can recognize a text written by hand.
+                The service uses machine learning techniques to convert an image of handwritten text into the digital form.
+                This may be useful if you have large amounts of such text that and need to copy it into digital documents.
+                This service lets you read the text more easily if you're struggling to recognize the penmanship of your text.
+            </p>
 
-            <p>{recognizedText}</p>
+            <div className={styles.fileInputContainer}>
+                <FileInput onChange={setAddedFile} />
+            </div>
+
+            <button className={styles.recognizeBtn} type="button" onClick={onUploadClick} disabled={addedFile === null}>Recognize Text</button>
+            <div className={styles.errorMessage}>{errorMessage}</div>
+
+            <p className={styles.recognizedText}>{recognizedText}</p>
         </div>
     )
 }
