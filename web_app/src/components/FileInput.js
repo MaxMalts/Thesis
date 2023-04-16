@@ -19,13 +19,16 @@ export default function FileInput({onChange}) {
             <label className={styles.dropArea}>
                 <input
                     className={styles.fileInput} type="file" onChange={handleFileChange}
+                    accept="image/*"
+                    capture="environment"
                     onDragOver={() => setIsDragging(true)} onDragLeave={() => setIsDragging(false)}
                     onDrop={() => setIsDragging(false)}
                 />
 
                 <span>Select or drop your file</span>
                 <PlusIcon className={styles.addFileIcon} />
-                <span className={styles.fileName}>{fileName}</span>
+                {fileName && <span className={styles.fileName}>File selected: <b>{fileName}</b></span>}
+
 
                 {isDragging && (
                     <span className={styles.draggingOverlay}>

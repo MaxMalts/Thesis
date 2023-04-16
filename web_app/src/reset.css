@@ -3,8 +3,6 @@
     margin: 0;
     outline: none;
 
-    font-weight: normal;
-
     border: none;
 }
 
@@ -25,4 +23,8 @@ button {
     -ms-appearance: none;
     -o-appearance: none;
     appearance: none;
+}
+
+button:disabled {
+    cursor: default;
 }

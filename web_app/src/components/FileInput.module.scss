@@ -46,6 +46,8 @@ $hover-transition-duration: 60ms;
     color: var(--primary-color);
 
     transition: transform $hover-transition-duration;
+
+    pointer-events: none;
 }
 
 .dropArea:hover .addFileIcon {
@@ -92,5 +94,5 @@ $hover-transition-duration: 60ms;
 
 .fileName {
     display: block;
-    margin: 20px auto 0 auto;
+    margin: 30px auto 0 auto;
 }
