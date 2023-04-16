@@ -1,0 +1,34 @@
+@import '../assets/styles/baseVariables.scss';
+
+.header {
+    padding: 16px 32px;
+
+    display: flex;
+    justify-content: space-between;
+
+    background: var(--primary-color);
+    border-top: var(--primary-color-strong) 3px solid;
+    box-shadow: 0 -20px 20px 15px #000;
+}
+
+.logoLink {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--text-color-inv);
+    text-decoration: none;
+
+    -webkit-appearance: none;
+       -moz-appearance: none;
+        -ms-appearance: none;
+         -o-appearance: none;
+            appearance: none;
+}
+
+.themeSwitcher {
+    width: 32px;
+    cursor: pointer;
+}
+
+.themeSwitcherIcon {
+    color: var(--text-color-inv);
+}

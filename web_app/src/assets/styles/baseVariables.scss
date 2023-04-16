@@ -1,0 +1,16 @@
+:root {
+    --background-color: #fff;
+    --text-color: #222;
+    --text-color-inv: #fff;
+    --primary-color: #65a6cb;
+    --primary-color-strong: #3c7fa6;
+    --primary-color-soft: #ddecf6;
+
+    &.darkMode {
+        --background-color: #222;
+        --text-color: #fff;
+        --text-color-inv: #000;
+        --primary-color: #56a6b7;
+        --primary-color-strong: #276a8d;
+    }
+}

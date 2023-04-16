@@ -8,10 +8,6 @@
     border: none;
 }
 
-hr {
-    border-bottom: 1px solid #000;
-}
-
 button {
     display: block;
     padding: 0;
@@ -28,13 +24,4 @@ button {
     -ms-appearance: none;
     -o-appearance: none;
     appearance: none;
-}
-
-textarea {
-    resize: none;
-    color: inherit;
-}
-
-input {
-    color: inherit;
 }

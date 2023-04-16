@@ -1,19 +1,38 @@
 import {useState} from 'react';
+import styles from './FileInput.module.scss';
+import DropFileIcon from '../assets/icons/DropFileIcon';
+import PlusIcon from '../assets/icons/PlusIcon';
 
 export default function FileInput({onChange}) {
-    // const [fileName, setFileName] = useState(null);
+    const [fileName, setFileName] = useState(null);
+    const [isDragging, setIsDragging] = useState(false);
 
     const handleFileChange = event => {
         if (event.target.files) {
-            // setFileName(event.target.files[0].name);
+            setFileName(event.target.files[0].name);
             onChange(event.target.files[0]);
         }
     };
 
     return (
-        <div>
-            <input type="file" onChange={handleFileChange} />
-            {/*<div>{fileName}</div>*/}
+        <div className={styles.container}>
+            <label className={styles.dropArea}>
+                <input
+                    className={styles.fileInput} type="file" onChange={handleFileChange}
+                    onDragOver={() => setIsDragging(true)} onDragLeave={() => setIsDragging(false)}
+                    onDrop={() => setIsDragging(false)}
+                />
+
+                <span>Select or drop your file</span>
+                <PlusIcon className={styles.addFileIcon} />
+                <span className={styles.fileName}>{fileName}</span>
+
+                {isDragging && (
+                    <span className={styles.draggingOverlay}>
+                        <DropFileIcon className={styles.dropFileIcon} />
+                    </span>
+                )}
+            </label>
         </div>
     );
 }

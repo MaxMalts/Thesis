@@ -1,6 +1,7 @@
-@import 'assets/styles/base-variables.scss';
+@import 'assets/styles/baseVariables.scss';
 
 .app {
+    font-family: sans-serif;
     text-align: center;
-    color: var(--secondary-color);
+    color: var(--text-color);
 }

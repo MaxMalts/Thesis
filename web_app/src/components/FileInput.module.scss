@@ -1,0 +1,82 @@
+$border-radius: 30px;
+$border-size: 5px;
+
+.container {
+    width: 70%;
+    margin: 50px auto 0 auto;
+}
+
+.dropArea {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+
+    background: var(--primary-color-soft);
+    border: solid var(--primary-color-strong) $border-size;
+    border-radius: $border-radius;
+
+    position: relative;
+}
+
+.fileInput {
+    display: block;
+    opacity: 0;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    cursor: pointer;
+}
+
+.addFileIcon {
+    display: block;
+    width: 120px;
+    margin: 20px auto 0 auto;
+    color: var(--primary-color);
+}
+
+.draggingOverlay {
+    display: block;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+}
+
+.draggingOverlay:before {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: var(--primary-color-soft);
+    border-radius: $border-radius - $border-size;
+}
+
+.dropFileIcon {
+    display: block;
+    width: 140px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    color: var(--primary-color);
+}
+
+.fileName {
+    display: block;
+    margin: 20px auto 0 auto;
+}
