@@ -8,15 +8,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-@RestController
 public class ApiServerApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApiServerApplication.class, args);
-	}
-
-	@GetMapping(value = "/", produces = "text/plain")
-	public String hello() {
-		return "<b>Hello world!</b>";
 	}
 }

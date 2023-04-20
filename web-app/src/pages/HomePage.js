@@ -17,7 +17,8 @@ export default function HomePage() {
         recognizeText(addedFile).then(result => {
             setRecognizedText(result);
         }).catch(reason => {
-            setErrorMessage("Unable to upload file to server, please try again.")
+            console.error("Unable to upload file to server.", reason);
+            setErrorMessage("Unable to upload file, please try again.");
         });
     }
 
