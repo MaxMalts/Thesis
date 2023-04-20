@@ -4,7 +4,7 @@ import FileInput from '../components/FileInput';
 import recognizeText from '../api/recognizeText';
 
 
-export default function() {
+export default function HomePage() {
     const [addedFile, setAddedFile] = useState(null);
     const [recognizedText, setRecognizedText] = useState(null)
     const [errorMessage, setErrorMessage] = useState(null)
