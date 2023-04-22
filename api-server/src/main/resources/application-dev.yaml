@@ -1,0 +1,8 @@
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+
+text-recognizer:
+  command: "python ~/Documents/Thesis/text-recognizer/main.py"
