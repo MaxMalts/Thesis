@@ -1,13 +1,13 @@
-package com.thesis.apiserver.service;
+package com.thesis.apiserver.persistence;
 
 import com.thesis.apiserver.error.InternalException;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.file.Path;
 
-@Service
+@Component
 public class FileSystemAdapter {
 
     public void save(MultipartFile file, Path path) {

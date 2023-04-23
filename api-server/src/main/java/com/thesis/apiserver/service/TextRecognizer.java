@@ -3,6 +3,7 @@ package com.thesis.apiserver.service;
 import com.thesis.apiserver.configuration.settings.TextRecognizerSettings;
 import com.thesis.apiserver.error.BusinessException;
 import com.thesis.apiserver.error.InternalException;
+import com.thesis.apiserver.persistence.FileSystemAdapter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
