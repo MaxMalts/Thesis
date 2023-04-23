@@ -1,5 +1,10 @@
+spring:
+  application:
+    name: thesis-api-server
+
 server:
   port: 8081
 
 text-recognizer:
   command: "python /text-recognizer/main.py"
+  images-directory: "/tmp/${spring.application.name}"
