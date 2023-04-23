@@ -5,14 +5,17 @@ import com.thesis.apiserver.error.BusinessException;
 import com.thesis.apiserver.error.InternalException;
 import com.thesis.apiserver.persistence.FileSystemAdapter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class TextRecognizer {
@@ -28,15 +31,24 @@ public class TextRecognizer {
     }
 
     public String recognizeText(Path imageFile) {
+        String[] command = new String[] {"bash", "-c", textRecognizerSettings.getCommand(), imageFile.toString()};
+
         Process recognizerProcess;
         try {
-            recognizerProcess = new ProcessBuilder(textRecognizerSettings.getCommand(), imageFile.toString()).start();
+            recognizerProcess = new ProcessBuilder(command).start();
         } catch (Exception ex) {
             throw new InternalException("Unable to start the text recognizer process", ex);
         }
 
         var exitCode = waitForProcess(recognizerProcess);
         if (exitCode != 0) {
+            try {
+                log.debug("Text recognition process returned non zero exit code. Error stream:\n" +
+                          new String(recognizerProcess.getErrorStream().readAllBytes()));
+            } catch (IOException ex) {
+                log.warn("Unable to read stderr from text recognizer process", ex);
+            }
+
             throw new InternalException("Text recognition process failed", "Error while recognizing text");
         }
 
