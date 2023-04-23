@@ -31,7 +31,7 @@ public class TextRecognizer {
     }
 
     public String recognizeText(Path imageFile) {
-        String[] command = new String[] {"bash", "-c", textRecognizerSettings.getCommand(), imageFile.toString()};
+        String[] command = new String[] {"bash", "-c", textRecognizerSettings.getCommand() + " " + imageFile.toString()};
 
         Process recognizerProcess;
         try {

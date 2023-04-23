@@ -1,0 +1,9 @@
+numpy==1.18.5
+opencv-python==4.6.0.66
+deskew==1.0.19
+
+protobuf==3.19.6
+tensorflow==2.3.0
+tensorflow-addons[tensorflow]==0.13.0
+
+git+https://github.com/githubharald/CTCWordBeamSearch.git@43567e5b06dd43bdcbec452f5099171c81f5e737

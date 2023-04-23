@@ -4,4 +4,4 @@ logging:
     com.thesis.apiserver: DEBUG
 
 text-recognizer:
-  command: "python3 ${user.home}/Documents/Thesis/text-recognizer/main.py"
+  command: "${user.home}/Documents/Thesis/text-recognizer/virtualenv/bin/python ${user.home}/Documents/Thesis/text-recognizer/main.py"
