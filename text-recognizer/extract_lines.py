@@ -57,18 +57,16 @@ def _bradley_thresholding(image):
 
 
 def _preprocess_image(image, image_width):
+    max_deskew_angle = 10
+    
     image = image.astype(np.float32)
     image = cv2.resize(image, (image_width, int(image.shape[0] * image_width / image.shape[1])))
     image = cv2.GaussianBlur(image, (5, 5), 1.5)
     
     image = _bradley_thresholding(image).astype(np.uint8)
     
-    #dilation
-    # kernel = np.ones((3, 3), np.uint8)
-    # dilated = 255 - cv2.dilate(255 - preprocessed_img, kernel, iterations = 1)
-    
-    angle = determine_skew(image)
-    if not (angle is None):
+    angle = determine_skew(image, 1)
+    if not (angle is None) and not (abs(angle) > max_deskew_angle):
         image = _rotate(image, angle, 255)  # size changed
         image = cv2.resize(image, (image_width, int(image.shape[0] * image_width / image.shape[1])))
     

@@ -21,7 +21,7 @@ public class TextRecognizerSettings {
     private String command;
     @NotNull
     private Path imagesDirectory;
-    private int recognitionTimeoutMs = 10000;
+    private int recognitionTimeoutMs = 20000;
 
     public void setImagesDirectory(String imagesDirectory) {
         this.imagesDirectory = Path.of(imagesDirectory);

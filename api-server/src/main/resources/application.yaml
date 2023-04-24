@@ -8,3 +8,4 @@ server:
 text-recognizer:
   command: "python /text-recognizer/main.py"
   images-directory: "/tmp/${spring.application.name}"
+  recognition-timeout-ms: 40000
