@@ -14,9 +14,8 @@ def main(argc, argv):
     
     recognizer = handwriting_recognizer()
     result = recognizer.recognize_lines(lines_images, are_binarized=True)
-    result = ''.join(result)
+    result = ' '.join(result)
     
-    # res = "Hello World from python".encode("utf-8")
     sys.stdout.buffer.write(result.encode("utf-8"))
 
 if __name__ == '__main__':

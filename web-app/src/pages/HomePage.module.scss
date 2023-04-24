@@ -53,6 +53,13 @@
     }
 }
 
+.loadingCircle {
+    display: block;
+    width: 50px;
+    margin: 20px auto 0 auto;
+    color: var(--primary-color);
+}
+
 .errorMessage {
     width: 70%;
     margin: 10px auto 0 auto;

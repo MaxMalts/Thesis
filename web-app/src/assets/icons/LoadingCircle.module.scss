@@ -1,0 +1,15 @@
+@keyframes rotation {
+    from {
+        rotate: 0;
+    }
+
+    to {
+        rotate: -360deg;
+    }
+}
+
+.loadingAnim {
+    transform-origin: center;
+    animation: rotation linear 600ms infinite;
+    animation-timing-function: steps(12, start);
+}
