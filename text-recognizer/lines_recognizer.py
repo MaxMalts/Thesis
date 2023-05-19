@@ -5,7 +5,7 @@ import tensorflow_addons as tfa
 from word_beam_search import WordBeamSearch
 
 
-class handwriting_recognizer:
+class lines_recognizer:
     
     model_file = '/home/max/Documents/Thesis/text-recognizer/model/model (also good).h5'
     corpus_file = '/home/max/Documents/Thesis/text-recognizer/words_database/american-english.txt'

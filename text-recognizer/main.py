@@ -1,6 +1,6 @@
 import sys
 from extract_lines import extract_lines
-from handwriting_recognizer import handwriting_recognizer
+from lines_recognizer import lines_recognizer
 
 
 def main(argc, argv):
@@ -12,7 +12,7 @@ def main(argc, argv):
     
     lines_images = extract_lines(argv[1])
     
-    recognizer = handwriting_recognizer()
+    recognizer = lines_recognizer()
     result = recognizer.recognize_lines(lines_images, are_binarized=True)
     result = ' '.join(result)
     
