@@ -3,6 +3,9 @@ import styles from './HomePage.module.scss';
 import FileInput from '../components/FileInput';
 import recognizeText from '../api/recognizeText';
 import LoadingCircle from '../assets/icons/LoadingCircle';
+import pdfButton from '../assets/icons/pdfButton.png';
+import docxButton from '../assets/icons/docxButton.png';
+import txtButton from '../assets/icons/txtButton.png';
 
 
 export default function HomePage() {
@@ -49,6 +52,12 @@ export default function HomePage() {
                 <LoadingCircle className={styles.loadingCircle} />
             }
             <div className={styles.errorMessage}>{errorMessage}</div>
+
+            <div className={styles.filesDownloadContainer}>
+                <button className={styles.fileDownloadBtn}><img className={styles.fileDownloadImg} title="download pdf" src={pdfButton} alt="Download PDF" /></button>
+                <button className={styles.fileDownloadBtn}><img className={styles.fileDownloadImg} title="download docx" src={docxButton} alt="Download DOCX" /></button>
+                <button className={styles.fileDownloadBtn}><img className={styles.fileDownloadImg} title="download txt" src={txtButton} alt="Download TXT" /></button>
+            </div>
 
             <p className={styles.recognizedText}>{recognizedText}</p>
         </div>
