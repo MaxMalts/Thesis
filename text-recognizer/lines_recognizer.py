@@ -8,7 +8,7 @@ from word_beam_search import WordBeamSearch
 class lines_recognizer:
     
     model_file = '/home/max/Documents/Thesis/text-recognizer/model/model (also good).h5'
-    corpus_file = '/home/max/Documents/Thesis/text-recognizer/words_database/american-english.txt'
+    corpus_file = '/home/max/Documents/Thesis/text-recognizer/words_database/american-english-preprocessed.txt'
     recognized_chars = ' !"#&\'()*+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
     word_chars = 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm'
     padding_token = len(recognized_chars) + 10

@@ -28,7 +28,9 @@ def extract_lines(filePath):
     lines = []
     for ctr in line_contours:
         x, y, w, h = cv2.boundingRect(ctr)
-        lines.append(img[y : y + h, x : x + w])
+        cur_line = img[y : y + h, x : x + w]
+        cur_line = _trim_line(cur_line)
+        lines.append(cur_line)
     
     return lines
 
@@ -69,6 +71,7 @@ def _preprocess_image(image, image_width):
     if not (angle is None) and not (abs(angle) > max_deskew_angle):
         image = _rotate(image, angle, 255)  # size changed
         image = cv2.resize(image, (image_width, int(image.shape[0] * image_width / image.shape[1])))
+        image = np.where(image < 180, np.uint8(0), np.uint8(255))
     
     return image
 
@@ -125,3 +128,16 @@ def _add_lines(image, contours, line_len):
         cv2.line(res_img, (x - line_len, y_mid), (x + w + line_len, y_mid), 0, width)
     
     return res_img
+
+def _trim_line(line):
+    black = line == 0
+    
+    blackX = np.nonzero(np.any(black, axis=0))[0]
+    x1 = blackX[0]
+    x2 = blackX[-1]
+    
+    blackY = np.nonzero(np.any(black, axis=1))[0]
+    y1 = blackY[0]
+    y2 = blackY[-1]
+    
+    return line[y1 : y2+1, x1 : x2+1]
