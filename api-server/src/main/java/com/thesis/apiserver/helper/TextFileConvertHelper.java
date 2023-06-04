@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 
 @Component
@@ -68,6 +69,6 @@ public class TextFileConvertHelper {
     }
 
     public void writeTxt(String text, Path path) {
-        throw new UnsupportedOperationException();
+        fileSystemAdapter.save(text.getBytes(StandardCharsets.UTF_8), path);
     }
 }
