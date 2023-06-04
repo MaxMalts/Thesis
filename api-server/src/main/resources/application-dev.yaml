@@ -1,7 +1,0 @@
-logging:
-  level:
-    org.springframework.web: DEBUG
-    com.thesis.apiserver: DEBUG
-
-text-recognizer:
-  command: "${user.home}/Documents/Thesis/text-recognizer/virtualenv/bin/python ${user.home}/Documents/Thesis/text-recognizer/main.py"

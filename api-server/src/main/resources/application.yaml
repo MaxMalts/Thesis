@@ -5,7 +5,9 @@ spring:
 server:
   port: 8081
 
-text-recognizer:
-  command: "python /text-recognizer/main.py"
-  images-directory: "/tmp/${spring.application.name}"
-  recognition-timeout-ms: 40000
+settings:
+  files-directory: "/tmp/${spring.application.name}/recognized"
+  text-recognizer:
+    command: "python /text-recognizer/main.py"
+    images-directory: "/tmp/${spring.application.name}/images"
+    recognition-timeout-ms: 40000

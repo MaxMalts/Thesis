@@ -36,8 +36,8 @@ public class TextRecognizer {
         Process recognizerProcess;
         try {
             recognizerProcess = new ProcessBuilder(command).start();
-        } catch (Exception ex) {
-            throw new InternalException("Unable to start the text recognizer process", ex);
+        } catch (Exception e) {
+            throw new InternalException("Unable to start the text recognizer process", e);
         }
 
         var exitCode = waitForProcess(recognizerProcess);
@@ -55,8 +55,8 @@ public class TextRecognizer {
         String result;
         try {
             result = new String(recognizerProcess.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
-        } catch (Exception ex) {
-            throw new InternalException("Unable to read the output stream of text recognizer process", ex, "Error while recognizing text");
+        } catch (Exception e) {
+            throw new InternalException("Unable to read the output stream of text recognizer process", e, "Error while recognizing text");
         }
 
         return result;
@@ -80,8 +80,8 @@ public class TextRecognizer {
                 exitCode = process.waitFor();
             }
 
-        } catch (InterruptedException ex) {
-            throw new InternalException("Text recognition interrupted", ex);
+        } catch (InterruptedException e) {
+            throw new InternalException("Text recognition interrupted", e);
         }
 
         return exitCode;

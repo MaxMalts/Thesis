@@ -13,7 +13,7 @@ import java.nio.file.Path;
 @Getter
 @Setter
 @Component
-@ConfigurationProperties("text-recognizer")
+@ConfigurationProperties("settings.text-recognizer")
 @Validated
 public class TextRecognizerSettings {
 
