@@ -1,6 +1,7 @@
 package com.thesis.apiserver.persistence;
 
 import com.thesis.apiserver.error.InternalException;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -41,5 +42,9 @@ public class FileSystemAdapter {
         } catch (IOException e) {
             throw new InternalException("Failed to read the file", e);
         }
+    }
+
+    public FileSystemResource getFileSystemResource(Path path) {
+        return new FileSystemResource(path);
     }
 }
