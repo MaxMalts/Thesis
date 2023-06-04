@@ -27,7 +27,6 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         log.error("Internal exception occurred", ex);
 
         var errorResponse = new ErrorResponse(errorSettings.getInternalError().getStatusCode(),
-                                              ex.getMessage(),
                                               ex.getUserMessage() == null
                                                   ? errorSettings.getInternalError().getDefaultUserMessage()
                                                   : ex.getUserMessage());
@@ -44,7 +43,6 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         log.error("Business exception occurred", ex);
 
         var errorResponse = new ErrorResponse(errorSettings.getBusinessError().getStatusCode(),
-                                              ex.getMessage(),
                                               ex.getUserMessage() == null
                                                   ? errorSettings.getBusinessError().getDefaultUserMessage()
                                                   : ex.getUserMessage());
@@ -61,7 +59,6 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         log.error("Unknown exception occurred", ex);
 
         var errorResponse = new ErrorResponse(errorSettings.getUnknownError().getStatusCode(),
-                                              ex.getMessage(),
                                               errorSettings.getUnknownError().getDefaultUserMessage());
         return handleExceptionInternal(ex,
                                        errorResponse,
