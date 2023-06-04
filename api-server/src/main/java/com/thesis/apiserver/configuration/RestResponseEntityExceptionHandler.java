@@ -2,6 +2,7 @@ package com.thesis.apiserver.configuration;
 
 import com.thesis.apiserver.configuration.settings.ErrorSettings;
 import com.thesis.apiserver.dto.rest.ErrorResponse;
+import com.thesis.apiserver.error.BusinessException;
 import com.thesis.apiserver.error.InternalException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,11 +24,13 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
     @ExceptionHandler(InternalException.class)
     public ResponseEntity<Object> handleInternalException(InternalException ex, WebRequest request) {
-        log.error("Internal exception occured", ex);
+        log.error("Internal exception occurred", ex);
 
         var errorResponse = new ErrorResponse(errorSettings.getInternalError().getStatusCode(),
                                               ex.getMessage(),
-                                              errorSettings.getInternalError().getDefaultUserMessage());
+                                              ex.getUserMessage() == null
+                                                  ? errorSettings.getInternalError().getDefaultUserMessage()
+                                                  : ex.getUserMessage());
 
         return handleExceptionInternal(ex,
                                        errorResponse,
@@ -36,9 +39,26 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
                                        request);
     }
 
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<Object> handleInternalException(BusinessException ex, WebRequest request) {
+        log.error("Business exception occurred", ex);
+
+        var errorResponse = new ErrorResponse(errorSettings.getBusinessError().getStatusCode(),
+                                              ex.getMessage(),
+                                              ex.getUserMessage() == null
+                                                  ? errorSettings.getBusinessError().getDefaultUserMessage()
+                                                  : ex.getUserMessage());
+
+        return handleExceptionInternal(ex,
+                                       errorResponse,
+                                       new HttpHeaders(),
+                                       HttpStatus.valueOf(errorSettings.getBusinessError().getStatusCode()),
+                                       request);
+    }
+
     @ExceptionHandler(Exception.class)
     protected ResponseEntity<Object> handleUnknownException(Exception ex, WebRequest request) {
-        log.error("Unknown exception occured", ex);
+        log.error("Unknown exception occurred", ex);
 
         var errorResponse = new ErrorResponse(errorSettings.getUnknownError().getStatusCode(),
                                               ex.getMessage(),

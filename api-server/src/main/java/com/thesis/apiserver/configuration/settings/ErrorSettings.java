@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class ErrorSettings {
 
     private ErrorTypeSettings internalError = new ErrorTypeSettings(500, "Server error");
-    private ErrorTypeSettings businessError = new ErrorTypeSettings(422, "Error");
+    private ErrorTypeSettings businessError = new ErrorTypeSettings(422, "Error occurred");
     private ErrorTypeSettings unknownError = new ErrorTypeSettings(500, "Unknown error");
 
     @Getter
