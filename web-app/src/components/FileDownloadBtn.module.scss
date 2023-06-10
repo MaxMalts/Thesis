@@ -1,0 +1,33 @@
+@import "../assets/styles/baseVariables.scss";
+
+$button-padding: 6px;
+
+.button {
+    width: 120px;
+    height: 65px;
+    margin: 0 20px;
+    padding: $button-padding;
+    box-sizing: border-box;
+
+    background: var(--background-color);
+    border: solid 1px var(--primary-color-strong);
+    border-radius: 10px;
+
+    transition: filter 100ms;
+
+    &:hover {
+        filter: brightness(0.96);
+    }
+
+    &:disabled {
+        filter: contrast(0.8);
+
+        &:hover {  // just for sure
+            filter: contrast(0.8);
+        }
+    }
+}
+
+.image {
+    height: calc(100% - 2 * $button-padding);
+}

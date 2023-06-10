@@ -1,3 +1,5 @@
+@import "../assets/styles/baseVariables.scss";
+
 .heading {
     width: 70%;
     margin: 70px auto 0 auto;
@@ -73,28 +75,6 @@
 
     display: flex;
     justify-content: center;
-}
-
-.fileDownloadBtn {
-    width: 120px;
-    height: 65px;
-    margin: 0 20px;
-    padding: 6px;
-    box-sizing: border-box;
-
-    background: var(--background-color);
-    border: solid 1px var(--primary-color-strong);
-    border-radius: 10px;
-
-    transition: filter 100ms;
-
-    &:hover {
-        filter: brightness(0.96);
-    }
-}
-
-.fileDownloadImg {
-    height: calc(100% - 2 * 6px);
 }
 
 .recognizedText {

@@ -6,6 +6,7 @@ import LoadingCircle from '../assets/icons/LoadingCircle';
 import pdfButton from '../assets/icons/pdfButton.png';
 import docxButton from '../assets/icons/docxButton.png';
 import txtButton from '../assets/icons/txtButton.png';
+import FileDownloadBtn from '../components/FileDownloadBtn';
 
 
 export default function HomePage() {
@@ -14,6 +15,10 @@ export default function HomePage() {
     const [recognizedText, setRecognizedText] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null);
 
+    const [pdfFileId, setPdfFileId] = useState(null);
+    const [docxFileId, setDocxFileId] = useState(null);
+    const [txtFileId, setTxtFileId] = useState(null);
+
     const onUploadClick = event => {
         if (!addedFile) {
             return;
@@ -21,10 +26,18 @@ export default function HomePage() {
 
         setIsLoading(true);
         setErrorMessage(null);
-        
+        setRecognizedText(null);
+        setPdfFileId(null);
+        setDocxFileId(null);
+        setTxtFileId(null);
+
         recognizeText(addedFile).then(result => {
-            setRecognizedText(result);
+            setRecognizedText(result["text"]);
             setIsLoading(false);
+            setPdfFileId(result["pdfId"]);
+            setDocxFileId(result["docxId"]);
+            setTxtFileId(result["txtId"]);
+
         }).catch(reason => {
             console.error("Unable to upload file to server.", reason);
             setErrorMessage("Unable to upload file, please try again.");
@@ -54,12 +67,12 @@ export default function HomePage() {
             <div className={styles.errorMessage}>{errorMessage}</div>
 
             <div className={styles.filesDownloadContainer}>
-                <button className={styles.fileDownloadBtn}><img className={styles.fileDownloadImg} title="download pdf" src={pdfButton} alt="Download PDF" /></button>
-                <button className={styles.fileDownloadBtn}><img className={styles.fileDownloadImg} title="download docx" src={docxButton} alt="Download DOCX" /></button>
-                <button className={styles.fileDownloadBtn}><img className={styles.fileDownloadImg} title="download txt" src={txtButton} alt="Download TXT" /></button>
+                <FileDownloadBtn title="Download PDF" icon={pdfButton} fileId={pdfFileId} />
+                <FileDownloadBtn title="Download DOCX" icon={docxButton} fileId={docxFileId} />
+                <FileDownloadBtn title="Download TXT" icon={txtButton} fileId={txtFileId} />
             </div>
 
             <p className={styles.recognizedText}>{recognizedText}</p>
         </div>
-    )
+    );
 }

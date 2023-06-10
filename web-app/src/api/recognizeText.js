@@ -13,5 +13,5 @@ export default function recognizeText(file) {
         } else {
             return Promise.reject(response);
         }
-    }).then(json => json["text"]);
+    });
 }
