@@ -20,7 +20,7 @@ public class FileReader {
         var filePath = generalSettings.getFilesDirectory().resolve(fileId);
 
         if (!Files.exists(filePath)) {  // if disappeared after this check, exception will be thrown while accessing via FileSystemResource
-            throw new BusinessException("File not found: " + filePath.toString(), "Requested file was not found");
+            throw new BusinessException("File not found: " + filePath.toString(), "requested file was not found");
         }
 
         return fileSystemAdapter.getFileSystemResource(filePath);

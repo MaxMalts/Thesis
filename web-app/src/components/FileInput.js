@@ -29,7 +29,6 @@ export default function FileInput({onChange}) {
                 <PlusIcon className={styles.addFileIcon} />
                 {fileName && <span className={styles.fileName}>File selected: <b>{fileName}</b></span>}
 
-
                 {isDragging && (
                     <span className={styles.draggingOverlay}>
                         <DropFileIcon className={styles.dropFileIcon} />

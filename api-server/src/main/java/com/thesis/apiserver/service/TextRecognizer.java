@@ -49,14 +49,16 @@ public class TextRecognizer {
                 log.warn("Unable to read stderr from text recognizer process", ex);
             }
 
-            throw new InternalException("Text recognition process failed", "Error while recognizing text");
+            throw new InternalException("Text recognition process failed", "error occurred while recognizing text");
         }
 
         String result;
         try {
             result = new String(recognizerProcess.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
         } catch (Exception e) {
-            throw new InternalException("Unable to read the output stream of text recognizer process", e, "Error while recognizing text");
+            throw new InternalException("Unable to read the output stream of text recognizer process",
+                                        e,
+                                        "error occurred while recognizing text");
         }
 
         return result;
@@ -73,7 +75,8 @@ public class TextRecognizer {
                 if (finished) {
                     exitCode = process.exitValue();
                 } else {
-                    throw new BusinessException("Recognition timeout", "You reached timeout limit");
+                    process.destroyForcibly();
+                    throw new BusinessException("Recognition timeout", "recognition timeout limit exceeded, try again");
                 }
 
             } else {

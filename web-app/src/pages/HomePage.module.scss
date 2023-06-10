@@ -21,8 +21,15 @@
     margin: 50px auto 0 auto;
 }
 
+.sizeLimitText {
+    width: 60%;
+    margin: 15px auto 0 auto;
+
+    font-size: 0.85em;
+}
+
 .recognizeBtn {
-    margin: 30px auto 0 auto;
+    margin: 20px auto 0 auto;
     padding: 15px 30px;
     box-sizing: border-box;
 
@@ -63,7 +70,7 @@
 }
 
 .errorMessage {
-    width: 70%;
+    width: 60%;
     margin: 10px auto 0 auto;
 
     color: #b02b2b;

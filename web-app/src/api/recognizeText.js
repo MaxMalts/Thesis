@@ -1,4 +1,8 @@
 export default function recognizeText(file) {
+    if (!(file instanceof File)) {
+        throw new Error("Wrong file type");
+    }
+
     let formData = new FormData();
     formData.append("file", file);
 
@@ -10,8 +14,13 @@ export default function recognizeText(file) {
     }).then(response => {
         if (response.ok && response.headers.get("Content-Type") === "application/json") {
             return response.json();
+        } else if (response.status === 422) {
+            return response.json().then(result => Promise.reject(result));
         } else {
-            return Promise.reject(response);
+            return Promise.reject({
+                'statusCode': response.status,
+                'message': response.status === 413 ? 'file to large' : 'service unavailable'
+            });
         }
     });
 }

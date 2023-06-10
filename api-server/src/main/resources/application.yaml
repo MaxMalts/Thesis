@@ -1,6 +1,10 @@
 spring:
   application:
     name: thesis-api-server
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
 
 server:
   port: 8081
@@ -10,4 +14,4 @@ settings:
   text-recognizer:
     command: "python /text-recognizer/main.py"
     images-directory: "/tmp/${spring.application.name}/images"
-    recognition-timeout-ms: 40000
+    recognition-timeout-ms: 60000

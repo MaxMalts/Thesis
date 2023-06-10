@@ -40,8 +40,8 @@ export default function HomePage() {
 
         }).catch(reason => {
             console.error("Unable to upload file to server.", reason);
-            setErrorMessage("Unable to upload file, please try again.");
             setIsLoading(false);
+            setErrorMessage("Error occurred: " + reason["message"]);
         });
     }
 
@@ -58,6 +58,9 @@ export default function HomePage() {
 
             <div className={styles.fileInputContainer}>
                 <FileInput onChange={setAddedFile} />
+            </div>
+            <div className={styles.sizeLimitText}>
+                Max size: 10 MB
             </div>
 
             <button className={styles.recognizeBtn} type="button" onClick={onUploadClick} disabled={addedFile === null || isLoading}>Recognize Text</button>
