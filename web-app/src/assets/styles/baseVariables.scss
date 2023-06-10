@@ -6,14 +6,18 @@
     --text-color-inv: #fff;
 
     --primary-color: #65a6cb;
-    --primary-color-strong: #2f6381;
     --primary-color-soft: #ddecf6;
+    --primary-color-strong: #2f6381;
 
     &.darkMode {
         --background-color: #222;
-        --text-color: #fff;
+
+        --text-color: #cacaca;
+        --text-color-soft: #888;
         --text-color-inv: #000;
-        --primary-color: #56a6b7;
-        --primary-color-strong: #276a8d;
+
+        --primary-color: #397791;
+        --primary-color-soft: #294f67;
+        --primary-color-strong: #75a8c4;
     }
 }
