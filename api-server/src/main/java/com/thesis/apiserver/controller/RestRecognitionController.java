@@ -1,8 +1,10 @@
 package com.thesis.apiserver.controller;
 
+import com.thesis.apiserver.dto.Area;
 import com.thesis.apiserver.dto.rest.RecognizeTextResponse;
 import com.thesis.apiserver.helper.FilesSaveHelper;
 import com.thesis.apiserver.service.TextRecognizer;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +20,10 @@ public class RestRecognitionController {
     private final FilesSaveHelper filesSaveHelper;
 
     @PostMapping(value = "recognize-text", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<RecognizeTextResponse> recognizeText(@RequestPart("file") MultipartFile imageFile) {
-        var text = textRecognizer.recognizeText(imageFile);
+    public ResponseEntity<RecognizeTextResponse> recognizeText(@RequestPart("file") MultipartFile imageFile,
+                                                               @RequestPart("area") @Valid Area area) {
+
+        var text = textRecognizer.recognizeText(imageFile, area);
         var savedFilesNames = filesSaveHelper.saveToFiles(text);
 
         return ResponseEntity.ok(new RecognizeTextResponse(text,

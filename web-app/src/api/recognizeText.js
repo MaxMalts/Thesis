@@ -1,10 +1,17 @@
-export default function recognizeText(file) {
+export default function recognizeText(file, area) {
     if (!(file instanceof File)) {
         throw new Error("Wrong file type");
+    }
+    if ((!(area.x1 instanceof Number) && !(typeof area.x1 === "number"))
+        || (!(area.y1 instanceof Number) && !(typeof area.y1 === "number"))
+        || (!(area.x2 instanceof Number) && !(typeof area.x2 === "number"))
+        || (!(area.y2 instanceof Number) && !(typeof area.y2 === "number"))) {
+        throw new Error("Wrong area object format");
     }
 
     let formData = new FormData();
     formData.append("file", file);
+    formData.append("area", new Blob([JSON.stringify(area)], {type: "application/json"}));
 
     return fetch("/api/recognize-text", {
         method: "POST",

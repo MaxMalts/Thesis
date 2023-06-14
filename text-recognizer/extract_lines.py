@@ -6,10 +6,9 @@ import tensorflow_addons as tfa
 from deskew import determine_skew
 
 
-def extract_lines(filePath):
+def extract_lines(img):
     image_width = 2048
     
-    img = cv2.imread(filePath, cv2.IMREAD_GRAYSCALE)
     img = _preprocess_image(img, image_width)
     
     char_contours = _find_contours(img)

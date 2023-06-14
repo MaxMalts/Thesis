@@ -1,6 +1,7 @@
 package com.thesis.apiserver.service;
 
 import com.thesis.apiserver.configuration.settings.TextRecognizerSettings;
+import com.thesis.apiserver.dto.Area;
 import com.thesis.apiserver.error.BusinessException;
 import com.thesis.apiserver.error.InternalException;
 import com.thesis.apiserver.persistence.FileSystemAdapter;
@@ -23,15 +24,21 @@ public class TextRecognizer {
     private final FileSystemAdapter fileSystemAdapter;
     private final TextRecognizerSettings textRecognizerSettings;
 
-    public String recognizeText(MultipartFile image) {
+    public String recognizeText(MultipartFile image, Area area) {
         var filePath = textRecognizerSettings.getImagesDirectory().resolve(UUID.randomUUID().toString());
         fileSystemAdapter.save(image, filePath);
 
-        return recognizeText(filePath);
+        return recognizeText(filePath, area);
     }
 
-    public String recognizeText(Path imageFile) {
-        String[] command = new String[] {"bash", "-c", textRecognizerSettings.getCommand() + " " + imageFile.toString()};
+    public String recognizeText(Path imageFile, Area area) {
+        String[] command = new String[]{"bash", "-c", String.format("%s %s %d %d %d %d",
+                                                                    textRecognizerSettings.getCommand(),
+                                                                    imageFile.toString(),
+                                                                    area.x1(),
+                                                                    area.y1(),
+                                                                    area.x2(),
+                                                                    area.y2())};
 
         Process recognizerProcess;
         try {

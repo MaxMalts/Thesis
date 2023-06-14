@@ -1,16 +1,18 @@
 import sys
+import cv2
 from extract_lines import extract_lines
 from lines_recognizer import lines_recognizer
 
 
 def main(argc, argv):
-    if (argc < 2):
-        raise ValueError("No file name passed to the program")
+    if (argc != 6):
+        raise ValueError("Wrong number of arguments passed to program")
     
-    sys.stderr.write(str(argc) + '\n')
-    sys.stderr.write(' '.join(argv) + '\n')
+    filePath = argv[1]
+    x1, y1, x2, y2 = map(int, argv[2:])
     
-    lines_images = extract_lines(argv[1])
+    img = cv2.imread(filePath, cv2.IMREAD_GRAYSCALE)
+    lines_images = extract_lines(img[y1:y2, x1:x2])
     
     recognizer = lines_recognizer()
     result = recognizer.recognize_lines(lines_images, are_binarized=True)
