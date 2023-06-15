@@ -38,10 +38,12 @@ export default function FileInput({onFileAdded}) {
     };
 
     const onCropCancel = () => {
-        setFileName(null);
-        setFile(null);
-        setImageSource(null);
-        setImageArea(null);
+        if (!imageArea) {
+            setFileName(null);
+            setFile(null);
+            setImageSource(null);
+            setImageArea(null);
+        }
         setShowCropPopup(false);
     };
 

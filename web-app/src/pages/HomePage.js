@@ -8,7 +8,6 @@ import docxButton from '../assets/icons/docxButton.png';
 import txtButton from '../assets/icons/txtButton.png';
 import FileDownloadBtn from '../components/FileDownloadBtn';
 import CommonButton from '../components/CommonButton';
-import ImageCropPopup from '../components/ImageCropPopup';
 
 
 export default function HomePage() {
