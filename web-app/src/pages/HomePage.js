@@ -13,6 +13,11 @@ import ImageCropPopup from '../components/ImageCropPopup';
 
 export default function HomePage() {
     const [addedFile, setAddedFile] = useState(null);
+
+    const [imageSource, setImageSource] = useState(null);
+    const [imageArea, setImageArea] = useState(null);
+    const [showCropPopup, setShowCropPopup] = useState(false);
+
     const [isLoading, setIsLoading] = useState(false);
     const [recognizedText, setRecognizedText] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null);
@@ -21,7 +26,14 @@ export default function HomePage() {
     const [docxFileId, setDocxFileId] = useState(null);
     const [txtFileId, setTxtFileId] = useState(null);
 
-    const onUploadClick = event => {
+    const onFileChange = file => {
+        setAddedFile(file);
+        setImageSource(URL.createObjectURL(file));
+        setImageArea(null);
+        setShowCropPopup(true);
+    }
+
+    const onUploadClick = () => {
         if (!addedFile) {
             return;
         }
@@ -33,7 +45,7 @@ export default function HomePage() {
         setDocxFileId(null);
         setTxtFileId(null);
 
-        recognizeText(addedFile).then(result => {
+        recognizeText(addedFile, imageArea).then(result => {
             setRecognizedText(result["text"]);
             setIsLoading(false);
             setPdfFileId(result["pdfId"]);
@@ -59,14 +71,24 @@ export default function HomePage() {
             </p>
 
             <div className={styles.fileInputContainer}>
-                <FileInput onChange={setAddedFile} />
+                <FileInput onChange={onFileChange} />
             </div>
             <div className={styles.sizeLimitText}>
                 Max size: 10 MB
             </div>
-            <ImageCropPopup initialArea={{x1: 0, y1: 0, x2: 100, y2: 100}}></ImageCropPopup>
+            {showCropPopup &&
+                <ImageCropPopup
+                    imgSrc={imageSource}
+                    initialArea={imageArea}
+                    onConfirm={area => (setImageArea(area), setShowCropPopup(false))}
+                />
+            }
 
-            <CommonButton className={styles.recognizeBtn} onClick={onUploadClick} disabled={addedFile === null || isLoading}>Recognize Text</CommonButton>
+            <CommonButton
+                className={styles.recognizeBtn}
+                onClick={onUploadClick}
+                disabled={addedFile === null || isLoading}
+            >Recognize Text</CommonButton>
             {isLoading &&
                 <LoadingCircle className={styles.loadingCircle} />
             }

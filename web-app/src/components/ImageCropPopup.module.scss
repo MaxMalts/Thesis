@@ -33,14 +33,16 @@
     width: 85%;
     height: 85%;
     transform: translate(-50%, -50%);
+
     padding: 40px;
     box-sizing: border-box;
 
     background: var(--background-color);
     border: solid var(--primary-color-strong) 2px;
     border-radius: 15px;
+    box-shadow: 10px 8px 25px -15px var(--primary-color);
 
-    @media screen and (max-height: 480px), (max-width: 360px) {
+    @media screen and (max-height: 480px), (max-width: 380px) {
         padding: 15px;
     }
 }
@@ -50,7 +52,7 @@
     font-weight: bold;
     color: var(--primary-color-strong);
 
-    @media screen and (max-height: 480px), (max-width: 360px) {
+    @media screen and (max-height: 480px), (max-width: 380px) {
         font-size: 1em;
     }
 }
@@ -60,11 +62,9 @@
     width: 90%;
     height: 60%;
 
-    border: solid black 1px;
-
     position: relative;
 
-    @media screen and (max-height: 480px), (max-width: 360px) {
+    @media screen and (max-height: 480px), (max-width: 380px) {
         margin-top: 15px;
     }
 }
@@ -74,6 +74,14 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
+    box-sizing: border-box;
+    border: solid var(--primary-color) 4px;
+    box-shadow: 10px 8px 25px -15px var(--primary-color);
+}
+
+.reactCrop {
+    display: block !important;
 }
 
 .image {
@@ -81,13 +89,15 @@
     pointer-events: none;
 }
 
-.confirmBtn {
+.confirmBtnContainer {
     position: absolute;
     left: 50%;
     bottom: 8%;
     transform: translateX(-50%);
+}
 
-    @media screen and (max-height: 480px), (max-width: 360px) {
+.confirmBtn {
+    @media screen and (max-height: 480px), (max-width: 380px) {
         bottom: 5%;
         padding-top: 5px;
         padding-bottom: 5px;

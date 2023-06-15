@@ -1,14 +1,13 @@
-import {useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import styles from './ImageCropPopup.module.scss';
 import CommonButton from './CommonButton';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/src/ReactCrop.scss'
-import pdfButton from '../assets/icons/pdfButton.png';
 import fitImageInContainer from '../assets/helpers/fitImageInParent';
 
 export default function ImageCropPopup({imgSrc, initialArea, onConfirm}) {
-    const [crop, setCrop] = useState({
-        unit: "px",
+    const [crop, setCrop] = useState(initialArea == null ? null : {
+        unit: "%",
         x: initialArea.x1,
         y: initialArea.y1,
         width: initialArea.x2 - initialArea.x1,
@@ -17,6 +16,25 @@ export default function ImageCropPopup({imgSrc, initialArea, onConfirm}) {
     const imgRef = useRef();
     const containerRef = useRef();
 
+    const imgResizeObserver = new ResizeObserver(() => fitImageInContainer(imgRef.current, containerRef.current));
+
+    useEffect(() => {
+        return () => {
+            imgResizeObserver.disconnect();
+        }
+    }, []);
+
+    const percentCropToArea = percentCrop => {
+        let width = imgRef.current.naturalWidth;
+        let height = imgRef.current.naturalHeight;
+        return {
+            x1: Math.floor(percentCrop.x * width * 0.01),
+            y1: Math.floor(percentCrop.y * height * 0.01),
+            x2: Math.floor((percentCrop.x + percentCrop.width) * width * 0.01),
+            y2: Math.floor((percentCrop.y + percentCrop.height) * height * 0.01)
+        };
+    };
+
     return (
         <div className={styles.overlay}>
             <div className={styles.popupContainer}>
@@ -24,32 +42,25 @@ export default function ImageCropPopup({imgSrc, initialArea, onConfirm}) {
 
                 <div className={styles.imageContainer} ref={containerRef}>
                     <div className={styles.imageContainerInner}>
-                        <ReactCrop crop={crop} onChange={crop => setCrop(crop)}>
+                        <ReactCrop className={styles.reactCrop} crop={crop} onChange={(_, percentCrop) => setCrop(percentCrop)}>
                             <img
                                 className={styles.image}
-                                src={pdfButton}
+                                src={imgSrc}
                                 alt=""
                                 ref={imgRef}
-                                onLoad={() => {
-                                    new ResizeObserver(() => fitImageInContainer(imgRef.current, containerRef.current)).observe(containerRef.current)
-                                }}
+                                onLoad={() => imgResizeObserver.observe(containerRef.current)}
                             />
                         </ReactCrop>
                     </div>
                 </div>
 
-
-                <CommonButton
-                    className={styles.confirmBtn}
-                    onClick={() => onConfirm({
-                        x1: crop.x,
-                        y1: crop.y,
-                        x2: crop.x + crop.width,
-                        y2: crop.y + crop.height
-                    })}
-                >
-                    Confirm
-                </CommonButton>
+                <div className={styles.confirmBtnContainer}>
+                    <CommonButton
+                        className={styles.confirmBtn}
+                        onClick={() => onConfirm(percentCropToArea(crop))}
+                        disabled={crop === null || crop === undefined || crop.width === 0 || crop.height === 0}
+                    >Confirm</CommonButton>
+                </div>
             </div>
         </div>
     )
