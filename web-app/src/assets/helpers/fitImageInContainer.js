@@ -1,4 +1,4 @@
-export default function fitImageInParent(image, container) {
+export default function fitImageInContainer(image, container) {
     let imageRatio = image.naturalWidth / image.naturalHeight;
     let containerStyle = getComputedStyle(container);
     let containerWidth = parseInt(containerStyle.width);

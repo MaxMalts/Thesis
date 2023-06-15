@@ -33,6 +33,13 @@ export default function HomePage() {
         setShowCropPopup(true);
     }
 
+    const onCropCancel = () => {
+        setAddedFile(null);
+        setImageSource(null);
+        setImageArea(null);
+        setShowCropPopup(false);
+    }
+
     const onUploadClick = () => {
         if (!addedFile) {
             return;
@@ -81,6 +88,7 @@ export default function HomePage() {
                     imgSrc={imageSource}
                     initialArea={imageArea}
                     onConfirm={area => (setImageArea(area), setShowCropPopup(false))}
+                    onCancel={onCropCancel}
                 />
             }
 

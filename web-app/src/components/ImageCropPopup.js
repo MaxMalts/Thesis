@@ -3,9 +3,10 @@ import styles from './ImageCropPopup.module.scss';
 import CommonButton from './CommonButton';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/src/ReactCrop.scss'
-import fitImageInContainer from '../assets/helpers/fitImageInParent';
+import CrossIcon from '../assets/icons/CrossIcon';
+import fitImageInContainer from '../assets/helpers/fitImageInContainer';
 
-export default function ImageCropPopup({imgSrc, initialArea, onConfirm}) {
+export default function ImageCropPopup({imgSrc, initialArea, onConfirm, onCancel}) {
     const [crop, setCrop] = useState(initialArea == null ? null : {
         unit: "%",
         x: initialArea.x1,
@@ -36,7 +37,8 @@ export default function ImageCropPopup({imgSrc, initialArea, onConfirm}) {
     };
 
     return (
-        <div className={styles.overlay}>
+        <>
+            <div className={styles.overlay} onClick={() => onCancel ? onCancel() : null}></div>
             <div className={styles.popupContainer}>
                 <div className={styles.heading}>Crop the text</div>
 
@@ -57,11 +59,15 @@ export default function ImageCropPopup({imgSrc, initialArea, onConfirm}) {
                 <div className={styles.confirmBtnContainer}>
                     <CommonButton
                         className={styles.confirmBtn}
-                        onClick={() => onConfirm(percentCropToArea(crop))}
+                        onClick={() => onConfirm ? onConfirm(percentCropToArea(crop)) : null}
                         disabled={crop === null || crop === undefined || crop.width === 0 || crop.height === 0}
                     >Confirm</CommonButton>
                 </div>
+
+                <button className={styles.closeBtn} onClick={() => onCancel ? onCancel() : null}>
+                    <CrossIcon />
+                </button>
             </div>
-        </div>
+        </>
     )
 }

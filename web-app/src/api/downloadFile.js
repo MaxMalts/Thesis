@@ -3,5 +3,5 @@ export default function downloadFile(fileId) {
         throw new Error("Wrong fileId type");
     }
 
-    return window.open("/api/download-file/" + fileId, "_blank");
+    return window.open("/api/download-file/" + fileId, "_self");
 }
