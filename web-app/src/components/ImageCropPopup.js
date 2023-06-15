@@ -7,13 +7,7 @@ import CrossIcon from '../assets/icons/CrossIcon';
 import fitImageInContainer from '../assets/helpers/fitImageInContainer';
 
 export default function ImageCropPopup({imgSrc, initialArea, onConfirm, onCancel}) {
-    const [crop, setCrop] = useState(initialArea == null ? null : {
-        unit: "%",
-        x: initialArea.x1,
-        y: initialArea.y1,
-        width: initialArea.x2 - initialArea.x1,
-        height: initialArea.y2 - initialArea.y1
-    });
+    const [crop, setCrop] = useState(null);
     const imgRef = useRef();
     const containerRef = useRef();
 
@@ -25,7 +19,26 @@ export default function ImageCropPopup({imgSrc, initialArea, onConfirm, onCancel
         }
     }, []);
 
+    const areaToPercentCrop = area => {
+        if (!area) {
+            return null;
+        }
+
+        let width = imgRef.current.naturalWidth;
+        let height = imgRef.current.naturalHeight;
+        return {
+            unit: "%",
+            x: Math.floor(area.x1 / width * 100),
+            y: Math.floor(area.y1 / height * 100),
+            width: Math.floor((area.x2 - area.x1) / width * 100),
+            height: Math.floor((area.y2 - area.y1) / height * 100),
+        };    }
+
     const percentCropToArea = percentCrop => {
+        if (!percentCrop) {
+            return null;
+        }
+
         let width = imgRef.current.naturalWidth;
         let height = imgRef.current.naturalHeight;
         return {
@@ -50,7 +63,7 @@ export default function ImageCropPopup({imgSrc, initialArea, onConfirm, onCancel
                                 src={imgSrc}
                                 alt=""
                                 ref={imgRef}
-                                onLoad={() => imgResizeObserver.observe(containerRef.current)}
+                                onLoad={() => (imgResizeObserver.observe(containerRef.current), setCrop(areaToPercentCrop(initialArea)))}
                             />
                         </ReactCrop>
                     </div>

@@ -13,10 +13,7 @@ import ImageCropPopup from '../components/ImageCropPopup';
 
 export default function HomePage() {
     const [addedFile, setAddedFile] = useState(null);
-
-    const [imageSource, setImageSource] = useState(null);
     const [imageArea, setImageArea] = useState(null);
-    const [showCropPopup, setShowCropPopup] = useState(false);
 
     const [isLoading, setIsLoading] = useState(false);
     const [recognizedText, setRecognizedText] = useState(null);
@@ -25,20 +22,6 @@ export default function HomePage() {
     const [pdfFileId, setPdfFileId] = useState(null);
     const [docxFileId, setDocxFileId] = useState(null);
     const [txtFileId, setTxtFileId] = useState(null);
-
-    const onFileChange = file => {
-        setAddedFile(file);
-        setImageSource(URL.createObjectURL(file));
-        setImageArea(null);
-        setShowCropPopup(true);
-    }
-
-    const onCropCancel = () => {
-        setAddedFile(null);
-        setImageSource(null);
-        setImageArea(null);
-        setShowCropPopup(false);
-    }
 
     const onUploadClick = () => {
         if (!addedFile) {
@@ -78,19 +61,11 @@ export default function HomePage() {
             </p>
 
             <div className={styles.fileInputContainer}>
-                <FileInput onChange={onFileChange} />
+                <FileInput onFileAdded={(file, area) => (setAddedFile(file), setImageArea(area))} />
             </div>
             <div className={styles.sizeLimitText}>
                 Max size: 10 MB
             </div>
-            {showCropPopup &&
-                <ImageCropPopup
-                    imgSrc={imageSource}
-                    initialArea={imageArea}
-                    onConfirm={area => (setImageArea(area), setShowCropPopup(false))}
-                    onCancel={onCropCancel}
-                />
-            }
 
             <CommonButton
                 className={styles.recognizeBtn}
