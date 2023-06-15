@@ -1,0 +1,96 @@
+@import "../assets/styles/baseVariables.scss";
+
+.overlay {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 100;
+
+    &:before {
+        content: "";
+
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+
+        background: var(--background-color);
+        filter: contrast(0.3);
+
+        opacity: 0.4;
+
+        pointer-events: none;
+    }
+}
+
+.popupContainer {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 85%;
+    height: 85%;
+    transform: translate(-50%, -50%);
+    padding: 40px;
+    box-sizing: border-box;
+
+    background: var(--background-color);
+    border: solid var(--primary-color-strong) 2px;
+    border-radius: 15px;
+
+    @media screen and (max-height: 480px), (max-width: 360px) {
+        padding: 15px;
+    }
+}
+
+.heading {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--primary-color-strong);
+
+    @media screen and (max-height: 480px), (max-width: 360px) {
+        font-size: 1em;
+    }
+}
+
+.imageContainer {
+    margin: 30px auto 0 auto;
+    width: 90%;
+    height: 60%;
+
+    border: solid black 1px;
+
+    position: relative;
+
+    @media screen and (max-height: 480px), (max-width: 360px) {
+        margin-top: 15px;
+    }
+}
+
+.imageContainerInner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.image {
+    max-width: none !important;
+    pointer-events: none;
+}
+
+.confirmBtn {
+    position: absolute;
+    left: 50%;
+    bottom: 8%;
+    transform: translateX(-50%);
+
+    @media screen and (max-height: 480px), (max-width: 360px) {
+        bottom: 5%;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        font-size: 1em;
+    }
+}

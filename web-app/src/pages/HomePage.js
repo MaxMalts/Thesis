@@ -7,6 +7,8 @@ import pdfButton from '../assets/icons/pdfButton.png';
 import docxButton from '../assets/icons/docxButton.png';
 import txtButton from '../assets/icons/txtButton.png';
 import FileDownloadBtn from '../components/FileDownloadBtn';
+import CommonButton from '../components/CommonButton';
+import ImageCropPopup from '../components/ImageCropPopup';
 
 
 export default function HomePage() {
@@ -62,8 +64,9 @@ export default function HomePage() {
             <div className={styles.sizeLimitText}>
                 Max size: 10 MB
             </div>
+            <ImageCropPopup initialArea={{x1: 0, y1: 0, x2: 100, y2: 100}}></ImageCropPopup>
 
-            <button className={styles.recognizeBtn} type="button" onClick={onUploadClick} disabled={addedFile === null || isLoading}>Recognize Text</button>
+            <CommonButton className={styles.recognizeBtn} onClick={onUploadClick} disabled={addedFile === null || isLoading}>Recognize Text</CommonButton>
             {isLoading &&
                 <LoadingCircle className={styles.loadingCircle} />
             }

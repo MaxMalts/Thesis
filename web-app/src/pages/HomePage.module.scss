@@ -30,36 +30,6 @@
 
 .recognizeBtn {
     margin: 20px auto 0 auto;
-    padding: 15px 30px;
-    box-sizing: border-box;
-
-    background: var(--primary-color);
-    border-radius: 15px;
-
-    font-size: 1.4em;
-    color: var(--text-color-inv);
-
-    transition: filter 100ms;
-
-    &:hover {
-        filter: brightness(0.92);
-    }
-
-    &:active {
-        transform: scale(0.98);
-    }
-
-    &:disabled {
-        filter: contrast(0.5);
-
-        &:hover {
-            filter: contrast(0.5) brightness(1);
-        }
-
-        &:active {
-            transform: scale(1);
-        }
-    }
 }
 
 .loadingCircle {
